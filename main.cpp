@@ -65,6 +65,28 @@ class Cfraction{
             return *this;
         }
 
+        Cfraction& operator++(){
+            numerator += denomenator;
+            return *this;
+        }
+
+        Cfraction operator++(int){
+            Cfraction temp(*this);
+            ++(*this);
+            return temp;
+        }
+
+        Cfraction& operator--(){
+            numerator -= denomenator;
+            return *this;
+        }
+
+        Cfraction operator--(int){
+            Cfraction temp(*this);
+            --(*this);
+            return temp;
+        }
+
         int64_t get_numartor() const {
             return numerator;
         }
