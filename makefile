@@ -1,5 +1,6 @@
 TARGET = main
-LIB = tests/libcfraction.so
+LIBDIR = tests
+LIB = $(LIBDIR)/libcfraction.so
 
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -fPIC
@@ -14,8 +15,11 @@ all: $(TARGET) $(LIB)
 $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-$(LIB): Cfraction.cpp
+$(LIB): Cfraction.cpp | $(LIBDIR)
 	$(CXX) $(CXXFLAGS) -shared -o $@ $<
+
+$(LIBDIR):
+	mkdir -p $(LIBDIR)
 
 clean:
 	rm -f $(TARGET) $(OBJ) $(LIB)
