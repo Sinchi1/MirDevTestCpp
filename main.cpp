@@ -13,18 +13,27 @@ class Cfraction{
             }
         }
 
-
     public:
+        Cfraction(){numerator,denomenator = 0,1;}
 
-    
+        Cfraction(int64_t numerator, int64_t denomenator = 1){
+            this->numerator = numerator;
+            this->denomenator = denomenator;
+            normalize();
+        }
 
-    int64_t get_numartor() const {
-        return numerator;
-    }
+        Cfraction(const Cfraction& copy){
+            numerator = copy.numerator;
+            denomenator = copy.denomenator;
+        }
 
-    int64_t get_denomenator() const {
-        return numerator;
-    }
+        int64_t get_numartor() const {
+            return numerator;
+        }
+
+        int64_t get_denomenator() const {
+            return numerator;
+        }
 };
 
 
