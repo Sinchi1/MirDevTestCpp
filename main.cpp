@@ -22,6 +22,14 @@ class Cfraction{
             normalize();
         }
 
+        Cfraction& operator=(const Cfraction& second) {
+        if (this != &second) {
+            numerator = second.numerator;
+            denomenator = second.denomenator;
+        }
+            return *this;
+        }
+
         Cfraction(const Cfraction& copy){
             numerator = copy.numerator;
             denomenator = copy.denomenator;
@@ -87,7 +95,48 @@ class Cfraction{
             return temp;
         }
 
-        int64_t get_numartor() const {
+        operator double() const {
+            return static_cast<double>(numerator) / denomenator;
+        }
+
+        Cfraction& operator()(int numerator, int denomenator){
+            this->numerator = numerator;
+            this->denomenator = denomenator;
+            normalize();
+            return *this;
+        }
+
+        Cfraction& operator()(int numerator){
+            this->numerator = numerator;
+            this->denomenator = 1;
+            return *this;
+        }
+
+        bool operator==(const Cfraction& second) const {
+            return this->numerator == second.numerator && this->denomenator == second.denomenator;
+        }
+
+        bool operator!=(const Cfraction& second) const {
+            return !(*this == second);
+        }
+
+        bool operator<(const Cfraction& second) const {
+            return static_cast<double>(*this) < static_cast<double>(second);
+        }
+
+        bool operator<=(const Cfraction& second) const {
+            return !(*this > second);
+        }
+
+        bool operator>(const Cfraction& second) const {
+            return static_cast<double>(*this) > static_cast<double>(second);
+        }
+
+        bool operator>=(const Cfraction& second) const {
+            return !(*this < second);
+        }
+
+        int64_t get_numerator() const {
             return numerator;
         }
 
