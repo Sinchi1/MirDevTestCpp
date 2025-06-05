@@ -1,7 +1,7 @@
 import ctypes
 import os
 
-lib_path = os.path.relpath("Stash/MirDevTestCpp/tests/libcfraction.so")
+lib_path = os.path.join(os.path.dirname(__file__), "libcfraction.so")
 lib = ctypes.CDLL(lib_path)
 
 class Fraction(ctypes.Structure):
