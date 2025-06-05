@@ -1,17 +1,21 @@
 TARGET = main
+LIB = tests/libcfraction.so
 
 CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -fPIC
 
-CXXFLAGS = -std=c++17 -Wall -Wextra -O2
-
-SRC = *.cpp
-
-all: $(TARGET)
-
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SRC)
-
-clean:
-	rm -f $(TARGET)
+SRC = $(wildcard *.cpp)
+OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean
+
+all: $(TARGET) $(LIB)
+
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+$(LIB): Cfraction.cpp
+	$(CXX) $(CXXFLAGS) -shared -o $@ $<
+
+clean:
+	rm -f $(TARGET) $(OBJ) $(LIB)
