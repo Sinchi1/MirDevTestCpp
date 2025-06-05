@@ -14,7 +14,7 @@ class Cfraction{
         }
 
     public:
-        Cfraction(){numerator,denomenator = 0,1;}
+        Cfraction(){numerator = 0; denomenator = 1;}
 
         Cfraction(int64_t numerator, int64_t denomenator = 1){
             this->numerator = numerator;
@@ -27,12 +27,50 @@ class Cfraction{
             denomenator = copy.denomenator;
         }
 
+        Cfraction operator+(const Cfraction& second) const{
+            return Cfraction{numerator * second.denomenator + second.numerator * denomenator,
+            denomenator * second.denomenator };
+        }
+        
+        Cfraction operator-(const Cfraction& second) const{
+            return Cfraction{numerator * second.denomenator - second.numerator * denomenator,
+            denomenator * second.denomenator };
+        }
+
+        Cfraction operator/(const Cfraction& second) const{
+            return Cfraction{numerator * second.denomenator, denomenator * second.numerator};
+        }
+
+        Cfraction operator*(const Cfraction& second) const{
+            return Cfraction{numerator * second.numerator, denomenator * second.denomenator};
+        }
+
+        Cfraction& operator+=(const Cfraction& second){
+            *this = *this + second;
+            return *this;
+        }
+
+        Cfraction& operator-=(const Cfraction& second){
+            *this = *this - second;
+            return *this;
+        }
+
+        Cfraction& operator/=(const Cfraction& second){
+            *this = *this / second;
+            return *this;
+        }
+
+        Cfraction& operator*=(const Cfraction& second){
+            *this = *this * second;
+            return *this;
+        }
+
         int64_t get_numartor() const {
             return numerator;
         }
 
         int64_t get_denomenator() const {
-            return numerator;
+            return denomenator;
         }
 };
 
